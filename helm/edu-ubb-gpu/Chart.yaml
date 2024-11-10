@@ -1,0 +1,8 @@
+apiVersion: v2
+# change this default name to match your app
+name: edu-ubb-gpu
+description: A Helm chart for an EduML training job
+
+type: application
+version: 0.1.0
+appVersion: 0.1.0

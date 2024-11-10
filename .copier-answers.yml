@@ -1,0 +1,11 @@
+# Changes here will be overwritten by Copier
+_commit: 1.0.0
+_src_path: https://github.com/koosie0507/cs-ubb-eduml-app.git
+author_email: alexandru.manole@ubbcluj.ro
+author_name: Alexandru Manole
+experiment_name: edu-ubb-gpu-experiment
+github_namespace: manole-alexandru
+github_repo: edu-ubb-gpu
+package_name: edu_ubb_gpu
+project_name: EDU UBB GPU
+project_slug: edu-ubb-gpu
