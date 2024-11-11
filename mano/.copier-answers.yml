@@ -1,0 +1,11 @@
+# Changes here will be overwritten by Copier
+_commit: 1.0.1
+_src_path: https://github.com/koosie0507/cs-ubb-eduml-app.git
+author_email: alexandru.manole@ubbcluj.ro
+author_name: Alexandru Manole
+experiment_name: cs-ubb-eduml-app-ma-experiment
+github_namespace: manole-alexandru
+github_repo: cs-ubb-eduml-app-ma
+package_name: cs_ubb_eduml_app_ma
+project_name: cs-ubb-eduml-app-ma
+project_slug: cs-ubb-eduml-app-ma

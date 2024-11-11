@@ -1,0 +1,65 @@
+name: publish Docker image
+on:
+  push:
+    paths-ignore:
+      - helm/**
+      - README.md
+      - LICENSE
+      - MLProject
+    branches:
+      - main
+      - master
+      - trunk
+    tags:
+      - '**'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+      - name: source code checkout
+        uses: actions/checkout@v4
+      - name: set up vars from Git
+        id: vars
+        run: |
+          BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          TAG_NAME=${GITHUB_REF#refs/tags} # Strip refs/tags/ for tag name
+          if [ "${GITHUB_REF_TYPE}" = "branch" ]; then
+            echo "IMAGE_TAG=$BRANCH_NAME" >> $GITHUB_ENV
+          elif [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            echo "IMAGE_TAG=$TAG_NAME" >> $GITHUB_ENV
+          fi
+          echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+      - name: ghcr.io login
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: extract container image metadata
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=ref,event=branch,suffix=-{{sha}}
+            type=semver,pattern={{version}}
+      - name: build&push container image
+        id: build_push
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

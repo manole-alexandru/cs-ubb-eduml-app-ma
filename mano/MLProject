@@ -1,0 +1,16 @@
+# Mlflow project file: https://mlflow.org/docs/latest/projects.html
+# Use this file to create a Mlflow project and validate that your setup works
+# locally before deploying to the EduML cluster.
+name: cs-ubb-eduml-app-ma
+docker_env:
+  # for this to work you should build and tag a local Docker image, i.e:
+  # docker build -t cs-ubb-eduml-app-ma .
+  image:  cs-ubb-eduml-app-ma
+
+entry_points:
+  main:
+    # define parameters here
+    parameters:
+      alpha: float
+      l1_ratio: {type: float, default: 0.1}
+    command: "python -m cs_ubb_eduml_app_ma --alpha {alpha} --l1-ratio {l1_ratio}"

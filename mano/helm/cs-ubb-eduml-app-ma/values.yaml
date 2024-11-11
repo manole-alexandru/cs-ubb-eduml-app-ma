@@ -2,18 +2,18 @@
 
 image:
   # verify this is correct by opening the following URL in your browser
-  # https://github.com/manole-alexandru/edu-ubb-gpu/pkgs/container/edu-ubb-gpu
+  # https://github.com/manole-alexandru/cs-ubb-eduml-app-ma/pkgs/container/cs-ubb-eduml-app-ma
   repository: ghcr.io/manole-alexandru/cs-ubb-eduml-app-ma
   tag: latest  # change this value to the latest specific image tag in the repository
 
 # customize the name of the Mlflow experiment
-#experiment: edu-ubb-gpu-experiment
+#experiment: cs-ubb-eduml-app-ma-experiment
 
 entrypoint:
   command:
     - "python"
     - "-m"
-    - "edu_ubb_gpu"
+    - "cs_ubb_eduml_app_ma"
   # configure command-line arguments
   # parameters are kebab-cased and prefixed with double dash before passing them
   # as command-line args
