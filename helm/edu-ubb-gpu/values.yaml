@@ -1,4 +1,3 @@
-# Deployment configuration file. Beware when removing '#': indentation matters
 
 image:
   # verify this is correct by opening the following URL in your browser
@@ -17,12 +16,13 @@ entrypoint:
   # configure command-line arguments
   # parameters are kebab-cased and prefixed with double dash before passing them
   # as command-line args
-  # e.g. 'alpha' becomes '--alpha=<value>' 'l1Ratio' becomes '--l1-ratio=<value>'
-  #parameters:
-  #  - name: alpha
-  #    value: 0.6
-  #  - name: l1Ratio
-  #    value: 0.1
+    - '--alpha=<value>' 
+    - '--l1-ratio=<value>'
+  parameters:
+    - name: alpha
+      value: 0.6
+    - name: l1Ratio
+      value: 0.1
 
 # Configure storage options for the training data
 #storage:
