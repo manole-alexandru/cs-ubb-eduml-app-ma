@@ -34,9 +34,12 @@ spec:
           env:
             - name: MLFLOW_TRACKING_ENABLED
               value: "true"
-          {{- with .Values.mlflow }}
+          {{- if .Values.mlflow }}
             - name: MLFLOW_TRACKING_URI
-              value: {{ .trackingUri | default "http://mlflow.mlflow.svc.cluster.local:5000/" | quote }}
+              value: {{ .Values.mlflow.trackingUri | default "http://mlflow.mlflow.svc.cluster.local:5000/" | quote }}
+          {{- else }}
+            - name: MLFLOW_TRACKING_URI
+              value: "http://mlflow.mlflow.svc.cluster.local:5000/"
           {{- end }}
             - name: MLFLOW_EXPERIMENT_NAME
               value: {{ include "experiment.name" . | quote }}
