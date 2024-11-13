@@ -3,7 +3,7 @@ requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "edu-ubb-gpu"
+name = "cs-ubb-eduml-app-ma"
 version = "0.1.0"
 
 classifiers = [
@@ -27,4 +27,10 @@ dependencies = [
     "numpy==2.1.3",
     "pandas==2.2.3",
     "scikit-learn==1.5.2",
+    "torch==2.5.0+cu121",
+    "torchvision==0.20.0+cu121",
+    "numpy==1.26.4",
+    "pandas==2.2.2",
+    "PIL==11.0.0",
+    "scipy==1.13.1"
 ]
