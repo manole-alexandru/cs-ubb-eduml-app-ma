@@ -4,7 +4,7 @@ image:
   # verify this is correct by opening the following URL in your browser
   # https://github.com/manole-alexandru/cs-ubb-eduml-app-ma/pkgs/container/cs-ubb-eduml-app-ma
   repository: ghcr.io/manole-alexandru/cs-ubb-eduml-app-ma
-  tag: latest  # change this value to the latest specific image tag in the repository
+  tag: master-f9f2841  # change this value to the latest specific image tag in the repository
 
 # customize the name of the Mlflow experiment
 #experiment: cs-ubb-eduml-app-ma-experiment
@@ -17,7 +17,21 @@ entrypoint:
   # configure command-line arguments
   # parameters are kebab-cased and prefixed with double dash before passing them
   # as command-line args
-  # e.g. 'alpha' becomes '--alpha=<value>' 'l1Ratio' becomes '--l1-ratio=<value>'
+    - '--epochs=<value>' 
+    - '--lr=<value>'
+    - '--max_lr=<value>'
+    - '--model_name=<value>'
+
+  parameters:
+    - name: epochs
+      value: 20
+    - name: lr
+      value: 3e-4
+    - name: max_lr
+      value: 1e-3
+    - name: model_name
+      value: "resnet18"
+
   #parameters:
   #  - name: alpha
   #    value: 0.6
