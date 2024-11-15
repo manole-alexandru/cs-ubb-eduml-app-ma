@@ -653,17 +653,17 @@ def fit_standford_cars(epochs: int, lr: float, max_lr: float, model_name: str):
     alphabetical_to_original_label = train_dataset.alphabetical_to_original_label
     val_dataset = StandfordCarsDataset(root=DATASET_PATH, split='val', transform=test_transforms)
     test_dataset = StandfordCarsDataset(root=DATASET_PATH, split='test', transform=test_transforms)
-    train_loader_classic  = DataLoader(train_dataset, batch_size=64, shuffle=True)
-    val_loader_clasic = DataLoader(val_dataset, batch_size=64, shuffle=False)
-    test_loader_clasic = DataLoader(test_dataset, batch_size=64, shuffle=False)
+    train_loader_classic  = DataLoader(train_dataset, batch_size=16, shuffle=True)
+    val_loader_clasic = DataLoader(val_dataset, batch_size=16, shuffle=False)
+    test_loader_clasic = DataLoader(test_dataset, batch_size=16, shuffle=False)
 
     train_dataset_hierarchic = StandfordCarsDataset(root=DATASET_PATH, split='train', transform=train_transforms, target_transform=lambda target: get_hierarchic_labels(target, alphabetical_to_original_label))
     val_dataset_hierarchic = StandfordCarsDataset(root=DATASET_PATH, split='val', transform=test_transforms, target_transform=lambda target: get_hierarchic_labels(target, alphabetical_to_original_label))
     test_dataset_hierarchic = StandfordCarsDataset(root=DATASET_PATH, split='test', transform=test_transforms, target_transform=lambda target: get_hierarchic_labels(target, alphabetical_to_original_label))
 
-    train_loader_parallel = DataLoader(train_dataset_hierarchic, batch_size=32, shuffle=True, num_workers=4)
-    val_loader_parallel = DataLoader(val_dataset_hierarchic, batch_size=32, shuffle=False, num_workers=4)
-    test_loader_parallel = DataLoader(test_dataset_hierarchic, batch_size=32, shuffle=False, num_workers=4)
+    train_loader_parallel = DataLoader(train_dataset_hierarchic, batch_size=32, shuffle=True, num_workers=2)
+    val_loader_parallel = DataLoader(val_dataset_hierarchic, batch_size=32, shuffle=False, num_workers=2)
+    test_loader_parallel = DataLoader(test_dataset_hierarchic, batch_size=32, shuffle=False, num_workers=42)
 
     # Initialize the model
     classic_model = ClassicMobileNetV3(num_classes=NUM_CLASSES, pretrained=True, MODEL=MODEL, MODEL_NAME=MODEL_NAME)
