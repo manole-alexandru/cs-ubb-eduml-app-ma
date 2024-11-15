@@ -360,7 +360,7 @@ import torch
 import copy
 from torch.optim.lr_scheduler import OneCycleLR
 
-def train_classic_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=MAX_LR, phases=['train', 'val']):
+def train_classic_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=1e-3, phases=['train', 'val']):
     model = model.to(device)
     history = {'train_loss': [], 'train_acc': [], 'val_loss': [], 'val_acc': [], 'test_loss':[], 'test_acc':[]}
 
@@ -425,7 +425,7 @@ def train_classic_mobilenet(model, dataloaders, criterion, optimizer, num_epochs
 
     return model, history
 
-def train_parallel_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=MAX_LR, phases=['train', 'val']):
+def train_parallel_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=1e-3, phases=['train', 'val']):
     model = model.to(device)
     history = {'train_loss': [], 'train_acc': [], 'val_loss': [], 'val_acc': [], 'train_acc_superclass': [], 'val_acc_superclass': [], 'test_loss':[], 'test_acc':[], 'test_acc_superclass':[]}
 
@@ -502,7 +502,7 @@ def train_parallel_mobilenet(model, dataloaders, criterion, optimizer, num_epoch
 
     return model, history
 
-def train_cascaded_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=MAX_LR, phases=['train', 'val']):
+def train_cascaded_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=1e-3, phases=['train', 'val']):
     model = model.to(device)
     history = {'train_loss': [], 'train_acc': [], 'val_loss': [], 'val_acc': [], 'train_acc_superclass': [], 'val_acc_superclass': [], 'test_loss':[], 'test_acc':[], 'test_acc_superclass':[]}
 
@@ -732,6 +732,7 @@ def fit_predict_wine_quality(a: float, l1: float):
 # Split the data into training and test sets. (0.75, 0.25) split.
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    print("Hello GPU")
     parser.add_argument("--epochs")
     parser.add_argument("--lr")
     parser.add_argument("--max_lr")

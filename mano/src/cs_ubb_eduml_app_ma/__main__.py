@@ -297,9 +297,9 @@ class StandfordCarsDataset(Dataset):
         else:
           self.path = 'cars_train'
 
-        self.image_paths = self.root + '/' + self.path + '/' + self.path + '/'
-        self.label_path = self.root + '/cars_annos.mat'
-        annotation_path = '/content/dataset/cardatasettrain.csv' # if self.split == 'train' else '/content/dataset/cardatasettest.csv'
+        self.image_paths = self.root / self.path / self.path 
+        self.label_path = self.root / 'cars_annos.mat'
+        annotation_path = self.root / 'cardatasettrain.csv' # if self.split == 'train' else '/content/dataset/cardatasettest.csv'
         self.annotation_df = pd.read_csv(annotation_path)
         self.data = []
         self.labels = []
@@ -324,7 +324,7 @@ class StandfordCarsDataset(Dataset):
         #  if self.split in ['val', 'test']:
         if (self.split == 'train' and ids <= no_samples * 0.7) or (self.split == 'val' and ids > no_samples * 0.7 and ids < no_samples * 0.8) or (self.split == 'test' and ids >= no_samples * 0.8):
             image_name = str(image_no).zfill(5) + '.jpg'
-            self.data.append(self.image_paths + image_name)
+            self.data.append(self.image_paths / image_name)
             class_id = sample['Class'] - 1 # sample[5][0][0] - 1
             if class_id not in self.alphabetical_to_original_label:
               superclass = self.classes[class_id][0].split(' ')[0]
@@ -360,7 +360,7 @@ import torch
 import copy
 from torch.optim.lr_scheduler import OneCycleLR
 
-def train_classic_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=MAX_LR, phases=['train', 'val']):
+def train_classic_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=1e-3, phases=['train', 'val']):
     model = model.to(device)
     history = {'train_loss': [], 'train_acc': [], 'val_loss': [], 'val_acc': [], 'test_loss':[], 'test_acc':[]}
 
@@ -425,7 +425,7 @@ def train_classic_mobilenet(model, dataloaders, criterion, optimizer, num_epochs
 
     return model, history
 
-def train_parallel_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=MAX_LR, phases=['train', 'val']):
+def train_parallel_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=1e-3, phases=['train', 'val']):
     model = model.to(device)
     history = {'train_loss': [], 'train_acc': [], 'val_loss': [], 'val_acc': [], 'train_acc_superclass': [], 'val_acc_superclass': [], 'test_loss':[], 'test_acc':[], 'test_acc_superclass':[]}
 
@@ -502,7 +502,7 @@ def train_parallel_mobilenet(model, dataloaders, criterion, optimizer, num_epoch
 
     return model, history
 
-def train_cascaded_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=MAX_LR, phases=['train', 'val']):
+def train_cascaded_mobilenet(model, dataloaders, criterion, optimizer, num_epochs=25, device='cuda', max_lr=1e-3, phases=['train', 'val']):
     model = model.to(device)
     history = {'train_loss': [], 'train_acc': [], 'val_loss': [], 'val_acc': [], 'train_acc_superclass': [], 'val_acc_superclass': [], 'test_loss':[], 'test_acc':[], 'test_acc_superclass':[]}
 

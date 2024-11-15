@@ -11,6 +11,8 @@ entry_points:
   main:
     # define parameters here
     parameters:
-      alpha: float
-      l1_ratio: {type: float, default: 0.1}
-    command: "python -m cs_ubb_eduml_app_ma --alpha {alpha} --l1-ratio {l1_ratio}"
+      epochs: int
+      lr: float
+      max_lr: float
+      model_name: str
+    command: "python -m cs-ubb-eduml-app-ma --epochs {epochs} --lr {lr} --max_lr {max_lr} --model_name {model_name}"
