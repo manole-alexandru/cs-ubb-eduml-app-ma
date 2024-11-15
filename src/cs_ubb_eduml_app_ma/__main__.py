@@ -38,6 +38,8 @@ settings = Settings.from_env()
 warnings.filterwarnings("ignore")
 np.random.seed(40)
 
+LOSS_WEIGHTS = [0.9, 0.1]
+
 
 ROOT_DIR = Path(__file__).parent.parent.parent
 
@@ -581,7 +583,6 @@ def train_cascaded_mobilenet(model, dataloaders, criterion, optimizer, num_epoch
 
 @torch_model(settings.mlflow.enabled, settings.mlflow.tracking_uri, settings.mlflow.experiment_name)
 def fit_standford_cars(epochs: int, lr: float, max_lr: float, model_name: str):
-    LOSS_WEIGHTS = [0.9, 0.1]
     EPOCHS = epochs
     DEVICE = 'cuda' # 'cpu'
     EXP_NO = 24
