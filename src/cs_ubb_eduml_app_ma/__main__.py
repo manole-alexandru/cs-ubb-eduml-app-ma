@@ -354,8 +354,13 @@ class StandfordCarsDataset(Dataset):
         return sample, label
     
 def get_hierarchic_labels(target, alphabetical_to_original_label):
-    superclass_label = alphabetical_to_original_label[target]['super_index']
-    target = alphabetical_to_original_label[target]['index']
+    if target in alphabetical_to_original_label:
+      superclass_label = alphabetical_to_original_label[target]['super_index']
+      target = alphabetical_to_original_label[target]['index']
+    # fix for small dataset version
+    else:
+       superclass_label = 0
+       target = 0 
     return superclass_label, target
 
 import torch
