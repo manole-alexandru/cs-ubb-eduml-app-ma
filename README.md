@@ -1,4 +1,4 @@
-# EDU UBB GPU
+# cs-ubb-eduml-app-ma
 
 This template sets up an ML training job. Add a description of your model or
 other useful information here.
@@ -20,7 +20,7 @@ before using this project. We'll be using `docker` terminology here. Build and
 tag a local Docker image.
 
 ```shell
-$ docker build -t edu-ubb-gpu .
+$ docker build -t cs-ubb-eduml-app-ma .
 ```
 
 [Mlflow](https://mlflow.org) is used for model tracking. An `MLProject` file
@@ -45,17 +45,17 @@ Follow these steps to run the training job on the EduML cluster.
 1. make sure that the project code is hosted in a Git repository on GitHub and
 that the GitHub repo is registered with the EduML team:
    * register a [personal access token](https://github.com/settings/tokens) that
-allows reading packages (the `read:packages` permission) under your GitHub user
-or organization
+allows reading packages (the `read:packages` scope) and full control over the repo
+(the `repo` scope)
    * send the token to the EduML team (e.g. via [OneTimeSecret](https://onetimesecret.com))
    * wait for confirmation that the repository is registered
-1. confirm that `helm/edu-ubb-gpu/values.yaml` matches your GitHub
+1. confirm that `helm/cs-ubb-eduml-app-ma/values.yaml` matches your GitHub
 repository settings
 1. confirm that there's a Docker image published in the GitHub Container
 Registry for your project. Using the default config, the image location is:
-`https://github.com/manole-alexandru/edu-ubb-gpu/pkgs/container/edu-ubb-gpu`
+`https://github.com/manole-alexandru/cs-ubb-eduml-app-ma/pkgs/container/cs-ubb-eduml-app-ma`
 1. use the specific tag name marked as latest (e.g. `main-f488fdb`) in your
-`helm/edu-ubb-gpu/values.yaml`
+`helm/cs-ubb-eduml-app-ma/values.yaml`
 1. commit and push the `values.yaml` file
 1. check out [Mlflow](https://mlflow.k8s.cs.ubbcluj.ro) or the [logs](https://grafana.k8s.cs.ubbcluj.ro/a/grafana-lokiexplore-app/explore?patterns=%5B%5D&var-primary_label=namespace%7C%3D~%7C.%2Amlflow.%2A)
 to verify that it worked.
