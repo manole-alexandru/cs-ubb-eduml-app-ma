@@ -712,7 +712,7 @@ def fit_standford_cars(epochs: int, lr: float, max_lr: float, model_name: str):
     )
 
     # return classic_history, parallel_history, cascaded_history
-    return None, None, trained_classic_model, (classic_history, parallel_history, cascaded_history)
+    return None, None, trained_classic_model, None
 
 @sklearn_model(settings.mlflow.enabled, settings.mlflow.tracking_uri, settings.mlflow.experiment_name)
 def fit_predict_wine_quality(a: float, l1: float):
@@ -751,5 +751,5 @@ if __name__ == "__main__":
     print(f"parsed args {epochs}, {lr}, {max_lr}, {model_name}")
 
     # fit_predict_wine_quality(alpha, l1_ratio)
-    _, _, _, (classic_history, parallel_history, cascaded_history) = fit_standford_cars(epochs, lr, max_lr, model_name)
-    print(classic_history, parallel_history, cascaded_history)
+    fit_standford_cars(epochs, lr, max_lr, model_name)
+    # print(classic_history, parallel_history, cascaded_history)
